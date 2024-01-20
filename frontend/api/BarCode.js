@@ -4,10 +4,21 @@ async function GetNutritionInformation(barcode) {
       `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
     );
 
-    return [response.data, null];
+    return [ParseNutrition(response.data), null];
   } catch (e) {
     return [null, e];
   }
 }
 
-export { GetNutritionInformation };
+function ParseNutrition(data) {
+  const ingredients =
+    data.product.ingredients_text_en || data.product.ingredients_text;
+  const nutriments = data.product.nutriments;
+
+  return {
+    ingredients,
+    nutriments,
+  };
+}
+
+export { GetNutritionInformation, ParseNutrition };
