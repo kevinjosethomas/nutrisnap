@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { GlobalProvider } from './context/GlobalState';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { ProfileScreen } from './screens';
+import { ProfileScreen, CameraScreen } from './screens';
 import { Platform } from 'react-native';
 
 
@@ -43,7 +43,7 @@ export default function App() {
           {/* Profile Screen */}
           <Tab.Screen 
             name="Scrn"
-            component={ProfileScreen}
+            component={CameraScreen}
             options = {{
               title: "Scan",
               tabBarIcon: () => (
@@ -60,7 +60,7 @@ export default function App() {
             name="Account"
             component={ProfileScreen}
             options = {{
-              title: "Acount",
+              title: "Account",
               tabBarIcon: () => (
                 <Image 
                   source={require("./assets/ProfileTab.png")}
