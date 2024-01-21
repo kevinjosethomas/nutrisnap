@@ -15,6 +15,7 @@ import { GenerateAdvisory } from "../api/OpenAI";
 import { GetNutritionInformation } from "../api/BarCode";
 
 export default function CameraScreen() {
+  const route = useRoute();
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
@@ -26,21 +27,17 @@ export default function CameraScreen() {
     requestPermission();
   }, []);
 
-  //Carbs 225-325 grams
-  //Fat 44-78 grams
-  //Fiber 25-30 grams
-  //Proteins 60 grams or 0.8 x bodyweight (kg)
-  //Salt 2000mg
-  //sugar 25-36 depending on male/female
-
-  const route = useRoute();
+  useEffect(() => {
+    console.log(route.params);
+  });
 
   useFocusEffect(
     useCallback(() => {
-      setScanned(false);
-      if (route.params?.takePhoto) {
-        onPhotoTaken();
-      }
+      (async () => {
+        if (route.params?.takePhoto) {
+          await onPhotoTaken();
+        }
+      })();
     }, [route.params?.takePhoto])
   );
 
@@ -75,8 +72,11 @@ export default function CameraScreen() {
       exif: true,
       compress: 0,
     });
+    camera.pausePreview();
 
-    navigation.navigate("Nutrition Page");
+    const image = new Image("data:image/jpg;base64," + photo);
+
+    // navigation.navigate("Nutrition Page");
   };
 
   return (

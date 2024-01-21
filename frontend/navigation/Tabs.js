@@ -97,10 +97,17 @@ export default function Tabs() {
               {...props}
               focused={props.accessibilityState.selected}
               onPress={(action) => {
-                if (action === "double") {
-                  navigation.navigate("Scan", { takePhoto: true });
+                if (action == "double") {
+                  navigation.push("Scan", { takePhoto: true });
+                  navigation.navigate("Scan", {
+                    screen: "Camera Screen",
+                    params: { takePhoto: true },
+                  });
                 } else {
-                  navigation.navigate("Scan");
+                  navigation.navigate("Scan", {
+                    screen: "Camera Screen",
+                    params: { takePhoto: false },
+                  });
                 }
               }}
             />
