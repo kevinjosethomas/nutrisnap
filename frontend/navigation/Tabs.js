@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ProfileScreen, CameraStack } from "../screens";
+import { CameraStack, AccountScreen } from "../screens";
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-
 
 const CustomTabBarButton = ({children, onPress, focused}) => (
     <TouchableOpacity
@@ -57,7 +56,7 @@ export default function Tabs() {
     >
       <Tab.Screen
         name="Past Scans"
-        component={ProfileScreen}
+        component={AccountScreen}
         options={{
           title: "Past Scans",
           tabBarIcon: ({ focused }) => (
@@ -121,7 +120,7 @@ export default function Tabs() {
 
       <Tab.Screen
         name="Account"
-        component={ProfileScreen}
+        component={AccountScreen}
         options={{
           title: "Account",
           tabBarIcon: ({ focused }) => (

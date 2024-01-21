@@ -7,6 +7,7 @@ const initialState = {
     weight: undefined,
     dietaryRestrictions: [],
     calorieTarget: undefined,
+    isLoggedIn: false,
 }
 
 export const GlobalContext = createContext(initialState);
@@ -49,6 +50,13 @@ export const GlobalProvider = ({ children }) => {
         })
     }
 
+    function setLogIn(isLoggedIn) {
+        dispatch({
+            type: "SET_IS_LOGGED_IN",
+            payload: isLoggedIn,
+        })
+    }
+
     return (
         <GlobalContext.Provider value = {{
             age: state.age,
@@ -61,6 +69,7 @@ export const GlobalProvider = ({ children }) => {
             setWeight,
             setCalorieTarget,
             addScan,
+            setLogIn,
         }}>
             {children}
         </GlobalContext.Provider>
