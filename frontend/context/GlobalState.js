@@ -45,7 +45,7 @@ const data = {
   }
 
 const initialState = {
-    pastScans: [data],
+    pastScans: [data, {...data}, {...data}, {...data}, {...data}],
     age: undefined,
     weight: undefined,
     dietaryRestrictions: [],
