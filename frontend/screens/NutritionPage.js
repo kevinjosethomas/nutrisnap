@@ -34,6 +34,19 @@ export default function NutritionPage() {
   const nutrition = route.params;
   const nutriments = nutrition.nutrition;
 
+  let image;
+  if (nutrition.rating > 8) {
+    image = Five;
+  } else if (nutrition.rating > 6) {
+    image = Four;
+  } else if (nutrition.rating > 4) {
+    image = Three;
+  } else if (nutrition.rating > 2) {
+    image = Two;
+  } else {
+    image = One;
+  }
+
   console.log(nutriments);
 
   return (
