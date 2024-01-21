@@ -9,7 +9,7 @@ Here is the format:
 success: boolean. true if you retrieved information. false if you failed to,
 rating: integer. rates the food item on a scale of 1 to 10 where 1 is very unhealthy/unsafe and 10 is healthy. be generous with your rating.
 warning: string. 1-2 sentences of any urgent life-threatening allergies/carcinogens or similar things to be worried about. leave empty if not urgent and life-threatening.
-description: string. 3-4 sentences that provide essential information about the item and any concerns that I should be vary of
+description: string. 2-3 sentences that provide essential information about the item and any concerns that I should be vary of
 }`;
 
 async function GenerateAdvisory(name, ingredients, nutrition) {
