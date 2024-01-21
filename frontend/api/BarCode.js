@@ -9,7 +9,24 @@ async function GetNutritionInformation(barcode) {
 }
 
 function ParseNutrition(data) {
-  const nutriments = data.product.nutriments;
+  const nutriments = data.product.nutriments || {
+    carbohydrates: 0,
+    carbohydrates_unit: "g",
+    energy: 0,
+    energy_unit: "kcal",
+    fat: 0,
+    fat_unit: "g",
+    fiber: 0,
+    fiber_unit: "g",
+    proteins: 0,
+    proteins_unit: "",
+    salt: 0,
+    salt_unit: "mg",
+    sodium: 0,
+    sodium_unit: "mg",
+    sugars: 0,
+    sugars_unit: "g",
+  };
   const nutrition = {
     carbohydrates: [nutriments.carbohydrates, nutriments.carbohydrates_unit],
     energy: [nutriments.energy, nutriments.energy_unit],

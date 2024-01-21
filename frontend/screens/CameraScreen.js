@@ -62,7 +62,15 @@ export default function CameraScreen() {
               Nutrition
             </Text>
           </View>
-          <View className="flex flex-col w-full bg-g-700 h-10"></View>
+          <View className="flex p-6 gap-y-1 flex-col w-full bg-g-700 rounded-2xl">
+            <Text
+              className="text-xl text-white"
+              style={{ fontFamily: "PlusJakartaSans_700Bold" }}
+            >
+              Nutrition Summary
+            </Text>
+            <Text className="text-white">{nutrition.description}</Text>
+          </View>
         </View>
       )}
       <Camera

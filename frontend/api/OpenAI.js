@@ -31,10 +31,7 @@ async function GenerateAdvisory(name, ingredients, nutrition) {
   });
 
   const data = JSON.parse(completion.choices[0].message.content);
-  console.log(data);
-  console.log(typeof data);
-  console.log(data.success);
-  console.log(Boolean(data.success));
+
   if (data.success) {
     console.log("hi");
     return data;
