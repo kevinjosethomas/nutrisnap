@@ -8,23 +8,26 @@ export default function CameraStack() {
 
   return (
     <Stack.Navigator>
-      <Stack.Screeen component={CameraScreen} />
-      <Stack.Screen
-        name="Nutrition Page"
-        component={NutritionPage}
-        options={({ navigation }) => ({
-          title: "",
-          headerShown: true,
-          headerLeft: () => (
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => navigation.goBack()}
-            >
-              {/* <Ionicons name="chevron-back-outline" size={35} color="black" /> */}
-            </TouchableOpacity>
-          ),
-        })}
-      />
+        <Stack.Screen 
+            name="Camera Screen"
+            component={CameraScreen} 
+        />
+        <Stack.Screen
+            name="Nutrition Page"
+            component={NutritionPage}
+            options={({ navigation }) => ({
+            title: "",
+            headerShown: true,
+            headerLeft: () => (
+                <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => navigation.goBack()}
+                >
+                <Ionicons name="chevron-back-outline" size={35} color="black" />
+                </TouchableOpacity>
+            ),
+            })}
+        />
     </Stack.Navigator>
   );
 }

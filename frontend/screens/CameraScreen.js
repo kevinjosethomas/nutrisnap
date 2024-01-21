@@ -57,7 +57,7 @@ export default function CameraScreen() {
       compress: 0,
     });
 
-    navigation.navigate("Nutrition Page", "ENTER PROPS HERE");
+    navigation.navigate("Nutrition Page", {});
   };
 
   return (
