@@ -29,6 +29,7 @@ export default function CameraScreen() {
 
   const onBarCodeScanned = async (result) => {
     console.log("hello");
+    camera.pausePreview();
     setScanned(true);
     const barcode = result.data;
     const { name, ingredients, nutritionString } =
