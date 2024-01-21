@@ -1,7 +1,7 @@
 import * as Haptics from "expo-haptics";
-import { TouchableOpacity, View } from "react-native";
 import { useEffect, useState, useCallback } from "react";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
+import { TouchableOpacity, View, Text } from "react-native";
 import { useRoute, useFocusEffect } from "@react-navigation/native";
 
 import { GenerateAdvisory } from "../api/OpenAI";
@@ -21,14 +21,13 @@ export default function CameraScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      if (route.params?.takePhoto) {
+      if (route.params?.takePxhoto) {
         onPhotoTaken();
       }
     }, [route.params?.takePhoto])
   );
 
   const onBarCodeScanned = async (result) => {
-    console.log("hello");
     camera.pausePreview();
     setScanned(true);
     const barcode = result.data;
@@ -37,7 +36,9 @@ export default function CameraScreen() {
 
     const data = await GenerateAdvisory(name, ingredients, nutritionString);
 
-    console.log(data);
+    setNutrition({
+      ...data,
+    });
   };
 
   const onPhotoTaken = async () => {
@@ -51,20 +52,16 @@ export default function CameraScreen() {
 
   return (
     <View className="flex-1">
+      {nutrition && (
+        <View className="absolute w-screen h-screen top-0 left-0 z-10 flex-1 flex-col justify-center items-center bg-white"></View>
+      )}
       <Camera
         ref={(r) => (camera = r)}
         type={CameraType.back}
         className="flex-1 flex-col justify-end items-center py-10 relative"
         autoFocus={AutoFocus.on}
         onBarCodeScanned={scanned ? undefined : onBarCodeScanned}
-      >
-        <TouchableOpacity
-          onPress={onPhotoTaken}
-          className="flex items-center justify-center h-24 w-24 rounded-full border-8 border-white"
-        >
-          <View className="w-[70px] h-[70px] rounded-full bg-white"></View>
-        </TouchableOpacity>
-      </Camera>
+      />
     </View>
   );
 }
