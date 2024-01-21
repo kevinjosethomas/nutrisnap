@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import AppReducer from './AppReducer';
+import  AppReducer from './AppReducer';
 
 const initialState = {
     pastScans: [],
@@ -8,7 +8,7 @@ const initialState = {
     dietaryRestrictions: [],
     calorieTarget: undefined,
     isLoggedIn: false,
-    theme: 'dark',
+    theme: 'light',
 }
 
 export const GlobalContext = createContext(initialState);

@@ -26,7 +26,7 @@ export default function CreateAccount() {
 
     const handleSignUp = () => {
         setInfo({email: '', password: ''});
-        navigation.navigate("Tabs");    
+        navigation.navigate("Get Info");    
     };  
     
     const validateEmail = (email) => {
@@ -37,15 +37,20 @@ export default function CreateAccount() {
         setValidation((prev) => ({ ...prev, isPasswordValid: password.length >= 7 }));
     };
 
-    const handleEmailEndEditing = () => {
-        validateEmail(info.email);
-    };
-
-    const handlePasswordEndEditing = () => {
-        validatePassword(info.password);
-    };
     const handleTogglePassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
+    };
+
+    const handleInputChange = (name, value) => {
+        setInfo(prev => ({ ...prev, [name]: value }));
+
+        if (name === 'email') {
+            validateEmail(value);
+        }
+
+        if (name === 'password' || name === 'confirmPassword') {
+            validatePassword(value, name);
+        }
     };
 
     useEffect(() => {
@@ -72,7 +77,7 @@ export default function CreateAccount() {
                     style={dynamicStyles.passwordInput}
                     placeholder="Password"
                     value={info.password}
-                    onChangeText={validatePassword}
+                    onChangeText={(value) => handleInputChange('password', value)}
                     secureTextEntry={!showPassword}
                 />
                 <TouchableOpacity 
