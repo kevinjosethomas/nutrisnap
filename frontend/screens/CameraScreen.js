@@ -58,6 +58,7 @@ export default function CameraScreen() {
     const data = await GenerateAdvisory(name, ingredients, nutritionString);
 
     addScan({ ...data, name, ingredients, nutrition });
+    setScanned(false);
 
     navigation.navigate("Nutrition Page", {
       ...data,
