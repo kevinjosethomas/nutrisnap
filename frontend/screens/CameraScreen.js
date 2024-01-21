@@ -46,8 +46,14 @@ export default function CameraScreen() {
     setScanned(true);
     camera.pausePreview();
     const barcode = result.data;
-    const { name, ingredients, nutrition, nutritionString } =
-      await GetNutritionInformation(barcode);
+    const d = await GetNutritionInformation(barcode);
+
+    if (!d) {
+      camera.resumePreview();
+      setScanned(false);
+    }
+
+    const { name, ingredients, nutrition, nutritionString } = d;
 
     const data = await GenerateAdvisory(name, ingredients, nutritionString);
 

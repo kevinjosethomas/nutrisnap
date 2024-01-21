@@ -51,7 +51,7 @@ export default function NutritionPage() {
 
   return (
     <View className="absolute gap-y-4 px-6 w-screen h-screen top-0 left-0 z-10 flex-1 flex-col justify-start items-center bg-white">
-      <View className="flex flex-row w-full pb-3 pt-1 items-center justify-between">
+      <View className="flex flex-row w-full pb-1 pt-1 items-center justify-between">
         <ArrowLeftCircle
           onPress={() => navigation.goBack()}
           stroke="#000"
@@ -69,6 +69,7 @@ export default function NutritionPage() {
         <View className="w-8 h-8 rounded-full" />
       </View>
       <ScrollView
+        bounces={false}
         className="flex w-full flex-col"
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
@@ -98,7 +99,7 @@ export default function NutritionPage() {
             </View>
           </View>
         </View>
-        <View className="flex flex-col w-full pb-40">
+        <View className="flex flex-col w-full pb-48">
           <Text className="text-xl font-bold mb-2">Nutritional Facts</Text>
           <Progress
             label="Calories"
