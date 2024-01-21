@@ -34,8 +34,6 @@ export default function NutritionPage() {
   const nutrition = route.params;
   const nutriments = nutrition.nutrition;
 
-   
-
   console.log(nutriments);
 
   return (
@@ -180,6 +178,3 @@ function Progress({ label, amount, TOTAL, color, icon }) {
     </View>
   );
 }
-
-
-
