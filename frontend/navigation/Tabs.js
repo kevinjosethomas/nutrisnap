@@ -92,6 +92,13 @@ export default function Tabs() {
                     <CustomTabBarButton 
                         {...props} 
                         focused={props.accessibilityState.selected} 
+                        onPress={() => {
+                            if (props.accessibilityState.selected) {
+                                navigation.navigate('Scan', { takePhoto: new Date().getTime() });
+                            } else {
+                                navigation.navigate('Scan');
+                            }
+                        }}
                     />
                 )
             })}
