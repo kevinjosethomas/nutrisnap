@@ -1,3 +1,5 @@
+import axios from "axios";
+
 async function GetNutritionInformation(barcode) {
   try {
     const response = await axios.get(
