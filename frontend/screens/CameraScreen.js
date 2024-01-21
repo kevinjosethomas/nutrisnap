@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
 import { useRoute, useFocusEffect } from "@react-navigation/native";
 
+import { GenerateAdvisory } from "../api/OpenAI";
 import { GetNutritionInformation } from "../api/BarCode";
 
 export default function CameraScreen() {
@@ -30,7 +31,7 @@ export default function CameraScreen() {
     console.log("hello");
     setScanned(true);
     const barcode = result.data;
-    const { name, ingredients, nutrition, nutritionString } =
+    const { name, ingredients, nutritionString } =
       await GetNutritionInformation(barcode);
 
     const data = await GenerateAdvisory(name, ingredients, nutritionString);
