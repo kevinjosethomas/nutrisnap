@@ -5,7 +5,7 @@ const initialState = {
     pastScans: [],
     age: undefined,
     weight: undefined,
-    dietaryRestrictions: undefined,
+    dietaryRestrictions: [],
     calorieTarget: undefined,
 }
 
