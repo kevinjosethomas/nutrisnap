@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { CameraStack, AccountScreen } from "../screens";
+import { CameraStack, GetInfoScreen } from "../screens";
 import { Image, View, TouchableOpacity } from "react-native";
 
 import User from "../assets/icons/user.png";
@@ -58,7 +58,7 @@ export default function Tabs() {
     >
       <Tab.Screen
         name="Past Scans"
-        component={AccountScreen}
+        component={GetInfoScreen}
         options={{
           title: "Past Scans",
           tabBarIcon: ({ focused }) => (
@@ -116,7 +116,7 @@ export default function Tabs() {
 
       <Tab.Screen
         name="Account"
-        component={AccountScreen}
+        component={GetInfoScreen}
         options={{
           title: "Account",
           tabBarIcon: ({ focused }) => (
