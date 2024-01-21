@@ -27,6 +27,9 @@ export default function CreateAccount() {
     { key: "1", value: "Vegetarian" },
     { key: "2", value: "Vegan" },
     { key: "3", value: "Gluten Free" },
+    { key: "4", value: "Low-Carb" },
+    { key: "5", value: "Low-Sodium" },
+    { key: "6", value: "Lactose-Free" },
   ];
 
   const handleAgeChange = () => {
