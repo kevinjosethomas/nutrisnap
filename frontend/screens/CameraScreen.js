@@ -21,7 +21,7 @@ export default function CameraScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      if (route.params?.takePxhoto) {
+      if (route.params?.takePhoto) {
         onPhotoTaken();
       }
     }, [route.params?.takePhoto])
