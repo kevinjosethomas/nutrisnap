@@ -5,6 +5,26 @@ function AppReducer(state, action) {
                 ...state,
                 pastScans: [action.payload, ...state.pastScans],
             };
+        case 'SET_AGE':
+            return {
+                ...state,
+                age: action.payload,
+            };
+        case 'SET_DIETARY_RESTRICTIONS':
+            return {
+                ...state,
+                dietaryRestrictions: [action.payload, ...state.dietaryRestrictions],
+            };
+        case 'SET_WEIGHT': 
+            return {
+                ...state,
+                weight: action.payload,
+            };
+        case 'SET_CALORIE_TARGET': 
+            return {
+                ...state,
+                calorieTarget: action.payload,
+            };
 
         
     }
