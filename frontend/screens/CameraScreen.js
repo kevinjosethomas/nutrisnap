@@ -53,7 +53,7 @@ export default function CameraScreen() {
   return (
     <View className="flex-1">
       {nutrition && (
-        <View className="absolute w-screen h-screen top-0 left-0 z-10 flex-1 flex-col justify-start items-center bg-white">
+        <View className="absolute gap-y-4 px-6 w-screen h-screen top-0 left-0 z-10 flex-1 flex-col justify-start items-center bg-white">
           <View className="flex flex-row items-center justify-between">
             <Text
               className="font-bold text-2xl"
@@ -62,6 +62,7 @@ export default function CameraScreen() {
               Nutrition
             </Text>
           </View>
+          <View className="flex flex-col w-full bg-g-700 h-10"></View>
         </View>
       )}
       <Camera
