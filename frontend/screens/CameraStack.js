@@ -1,33 +1,30 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { CameraScreen } from "./CameraScreen";
-import { NutritionPage } from "./NutritionPage";
+import CameraScreen from "./CameraScreen";
+import NutritionPage from "./NutritionPage";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function CameraStack() {
-  const Stack = createStackNavigator();
+const Stack = createStackNavigator();
 
+export default function CameraStack() {
   return (
     <Stack.Navigator>
-        <Stack.Screen 
-            name="Camera Screen"
-            component={CameraScreen} 
-        />
-        <Stack.Screen
-            name="Nutrition Page"
-            component={NutritionPage}
-            options={({ navigation }) => ({
-            title: "",
-            headerShown: true,
-            headerLeft: () => (
-                <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => navigation.goBack()}
-                >
-                <Ionicons name="chevron-back-outline" size={35} color="black" />
-                </TouchableOpacity>
-            ),
-            })}
-        />
+      <Stack.Screen name="Camera Screen" component={CameraScreen} />
+      <Stack.Screen
+        name="Nutrition Page"
+        component={NutritionPage}
+        options={({ navigation }) => ({
+          title: "",
+          headerShown: true,
+          headerLeft: () => (
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}
+            >
+              <Ionicons name="chevron-back-outline" size={35} color="black" />
+            </TouchableOpacity>
+          ),
+        })}
+      />
     </Stack.Navigator>
   );
 }
