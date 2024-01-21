@@ -29,7 +29,12 @@ function AppReducer(state, action) {
             return {
                 ...state,
                 isLoggedIn: action.payload,
-            }
+            };
+        case 'TOGGLE_THEME':
+            return {
+                ...state,
+                theme: state.theme === 'light' ? 'dark' : 'light',
+            };
         default:
             return state;
     }

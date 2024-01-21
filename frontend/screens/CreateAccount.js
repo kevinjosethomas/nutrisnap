@@ -6,10 +6,16 @@ import { GlobalContext } from '../context/GlobalState';
 export default function CreateAccount() {
     const navigation = useNavigation(); 
     const [showPassword, setShowPassword] = useState(false);
+    const { setLogIn} = useContext(GlobalContext);
+    const { theme } = useContext(GlobalContext);
+
+    const dynamicStyles = styles(theme);
+
     const [info, setInfo] = useState({
         email: '',
         password: '',
     });
+
     const [validation, setValidation] = useState({
         isEmailValid: true,
         isPasswordValid: true
@@ -19,20 +25,25 @@ export default function CreateAccount() {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
     const handleSignUp = () => {
-        setInfo({ email: '', password: '' });
+        setInfo({email: '', password: ''});
         navigation.navigate("Tabs");    
-    };
-
+    };  
+    
     const validateEmail = (email) => {
         setValidation((prev) => ({ ...prev, isEmailValid: emailRegex.test(email) }));
-        setInfo((prev) => ({ ...prev, email }));
     };
 
-    const validatePassword = (password) => {
+     const validatePassword = (password) => {
         setValidation((prev) => ({ ...prev, isPasswordValid: password.length >= 7 }));
-        setInfo((prev) => ({ ...prev, password }));
     };
 
+    const handleEmailEndEditing = () => {
+        validateEmail(info.email);
+    };
+
+    const handlePasswordEndEditing = () => {
+        validatePassword(info.password);
+    };
     const handleTogglePassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
@@ -43,22 +54,22 @@ export default function CreateAccount() {
     }, [info.email, info.password]);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Calorie Tracker</Text>
-            <Text style={styles.signUpText}>Sign Up</Text>
-            <Text style={styles.text}>Email</Text>
+        <View style={dynamicStyles.container}>
+            <Text style={dynamicStyles.title}>Calorie Tracker</Text>
+            <Text style={dynamicStyles.signUpText}>Sign Up</Text>
+            <Text style={dynamicStyles.text}>Email</Text>
             <TextInput
-                style={styles.emailInput}
+                style={dynamicStyles.emailInput}
                 placeholder="Email"
                 value={info.email}
                 onChangeText={validateEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
             />
-            <Text style={styles.text}>Password</Text>
-            <View style={styles.passwordInputWrapper}>
+            <Text style={dynamicStyles.text}>Password</Text>
+            <View style={dynamicStyles.passwordInputWrapper}>
                 <TextInput
-                    style={styles.passwordInput}
+                    style={dynamicStyles.passwordInput}
                     placeholder="Password"
                     value={info.password}
                     onChangeText={validatePassword}
@@ -66,30 +77,44 @@ export default function CreateAccount() {
                 />
                 <TouchableOpacity 
                     onPress={handleTogglePassword}
-                    style={styles.toggleButton}
+                    style={dynamicStyles.toggleButton}
                 >
-                    <Text style={styles.passwordText}>{showPassword ? 'Hide' : 'Show'}</Text>
+                    <Text style={[styles.passwordText, theme === 'dark' ? styles.textDark : styles.textLight]}>
+                        {showPassword ? 'Hide' : 'Show'}
+                    </Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity  
-                style={[styles.loginButton, styles.button, !isFormValid && styles.disabledButton]} 
+                style={[dynamicStyles.loginButton, !isFormValid && dynamicStyles.disabledButton]} 
                 onPress={handleSignUp}
                 disabled={!isFormValid}
             >
-                <Text style={[styles.loginButtonText, styles.buttonText]}>CONTINUE</Text>
+                <Text style={dynamicStyles.buttonText}>CONTINUE</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: theme === 'dark' ? '#333' : 'white',
         justifyContent: 'center',
         alignItems: 'center',
         paddingBottom: 50,
         padding: 20,
+    },
+    title: {
+        fontSize: 30,
+        paddingBottom: 40,
+        fontWeight: 'bold',
+        color: '#4cbc80',
+    },
+    signUpText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        paddingBottom: 50,
+        color: theme === 'dark' ? '#ddd' : '#000',
     },
     text: {
         fontSize: 16,
@@ -97,13 +122,14 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         paddingBottom: 6,
         paddingLeft: 8,
+        color: theme === 'dark' ? '#fff' : '#000',
     },
     emailInput: {
         width: '100%',
         borderRadius: 15,
         padding: 16,
         marginBottom: 20,
-        backgroundColor: '#d3d3d3',
+        backgroundColor: theme === 'dark' ? '#555' : '#d3d3d3',
     },
     passwordInputWrapper: {
         flexDirection: 'row',
@@ -111,7 +137,7 @@ const styles = StyleSheet.create({
         borderRadius: 14,
         marginBottom: 20,
         width: '100%',
-        backgroundColor: '#d3d3d3',
+        backgroundColor: theme === 'dark' ? '#555' : '#d3d3d3',
     },
     passwordInput: {
         flex: 1,
@@ -120,51 +146,24 @@ const styles = StyleSheet.create({
     toggleButton: {
         padding: 16,
     },
-    button: {
+    passwordText: {
+        fontSize: 12,
+        color: theme === 'dark' ? '#fff' : '#222222',
+    },
+    loginButton: {
+        backgroundColor: theme === 'dark' ? '#556' : '#4cbc80',
+        borderRadius: 14,
         width: '100%',
         padding: 14,
         alignItems: 'center',
         marginBottom: 10,
     },
-    loginButton: {
-        backgroundColor: '#4cbc80',
-        borderRadius: 14,
-    },
-    createAccountButton: {
-        backgroundColor: 'white',
-        borderColor: 'black',
-        borderWidth: 2,
-        borderRadius: 14,
-    },
     buttonText: {
         fontWeight: 'bold',
         fontSize: 16,
-    },
-    loginButtonText: {
-        color: 'white',
-    },
-    createAccountButtonText: {
-        color: 'black',
-    },
-    errorBorder: {
-        borderColor: '#8B0000',
+        color: theme === 'dark' ? '#fff' : '#000',
     },
     disabledButton: {
         backgroundColor: '#a9a9a9',
     },
-    passwordText: {
-        fontSize: 12,
-        color: '#222222',
-    },
-    signUpText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        paddingBottom: 50,
-    },
-    title: {
-        fontSize: 30,
-        paddingBottom: 40,
-        fontWeight: 'bold',
-        color: '#4cbc80',
-    }
-})
+});

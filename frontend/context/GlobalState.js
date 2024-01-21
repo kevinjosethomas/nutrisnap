@@ -8,6 +8,7 @@ const initialState = {
     dietaryRestrictions: [],
     calorieTarget: undefined,
     isLoggedIn: false,
+    theme: 'dark',
 }
 
 export const GlobalContext = createContext(initialState);
@@ -57,9 +58,16 @@ export const GlobalProvider = ({ children }) => {
         })
     }
 
+    function toggleTheme() {
+        dispatch({
+            type: 'TOGGLE_THEME',
+        });
+    }
+
     return (
         <GlobalContext.Provider 
             value = {{
+                theme: state.theme,
                 age: state.age,
                 weight: state.weight,
                 dietaryRestrictions: state.dietaryRestrictions,
@@ -71,6 +79,7 @@ export const GlobalProvider = ({ children }) => {
                 setCalorieTarget,
                 addScan,
                 setLogIn,
+                toggleTheme,
             }}>
             {children}
         </GlobalContext.Provider>

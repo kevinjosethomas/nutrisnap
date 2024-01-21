@@ -4,53 +4,28 @@ import { useNavigation } from '@react-navigation/native';
 import { GlobalContext } from '../context/GlobalState';
 
 export default function LogIn() {
-    const navigation = useNavigation(); 
+    const navigation = useNavigation();
+    const { setLogIn, theme } = useContext(GlobalContext);
+
     const [showPassword, setShowPassword] = useState(false);
-    const { setLogIn} = useContext(GlobalContext);
-
-    const [info, setInfo] = useState({
-        email: '',
-        password: '',
-    });
-
-    const [validation, setValidation] = useState({
-        isEmailValid: true,
-        isPasswordValid: true
-    });
+    const [info, setInfo] = useState({ email: '', password: '' });
+    const [validation, setValidation] = useState({ isEmailValid: true, isPasswordValid: true });
 
     const isFormValid = validation.isEmailValid && validation.isPasswordValid;
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
     const handleLogin = () => {
-        setInfo({email: '', password: ''});
+        // Implement login logic here
+        setLogIn(true);
+        navigation.navigate('Account');
+    };
 
-        const password = true;
-        if (password) {
-           setLogIn(true); 
-           navigation.navigate('Account');
-        } else {
-
-        }
-        
-    };  
-    
     const validateEmail = (email) => {
-        setValidation((prev) => ({ ...prev, isEmailValid: emailRegex.test(email) }));
+        setValidation(prev => ({ ...prev, isEmailValid: emailRegex.test(email) }));
     };
 
-     const validatePassword = (password) => {
-        setValidation((prev) => ({ ...prev, isPasswordValid: password.length >= 7 }));
-    };
-
-    const handleEmailEndEditing = () => {
-        validateEmail(info.email);
-    };
-
-    const handlePasswordEndEditing = () => {
-        validatePassword(info.password);
-    };
-    const handleTogglePassword = () => {
-        setShowPassword((prevShowPassword) => !prevShowPassword);
+    const validatePassword = (password) => {
+        setValidation(prev => ({ ...prev, isPasswordValid: password.length >= 7 }));
     };
 
     useEffect(() => {
@@ -58,61 +33,59 @@ export default function LogIn() {
         validatePassword(info.password);
     }, [info.email, info.password]);
 
+    const dynamicStyles = getStyles(theme);
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Calorie Tracker</Text>
-            <Text style={styles.signUpText}>Sign In</Text>
-            <Text style={styles.text}>Email</Text>
+        <View style={dynamicStyles.container}>
+            <Text style={dynamicStyles.title}>Calorie Tracker</Text>
+            <Text style={dynamicStyles.signUpText}>Sign In</Text>
+            <Text style={dynamicStyles.text}>Email</Text>
             <TextInput
-                style={
-                    styles.emailInput
-                }
+                style={dynamicStyles.emailInput}
                 placeholder="Email"
+                placeholderTextColor="#aaa"
                 value={info.email}
-                onChangeText={(text) => {
-                    setInfo((prev) => ({ ...prev, email: text }));
-                }}
-                onEndEditing={handleEmailEndEditing}
+                onChangeText={(text) => setInfo({ ...info, email: text })}
+                onEndEditing={() => validateEmail(info.email)}
                 keyboardType="email-address"
                 autoCapitalize="none"
             />
-            <Text style={styles.text}>Password</Text>
-            <View style={
-                styles.passwordInputWrapper
-            }>
-            <TextInput
-                    style={styles.passwordInput }
+            <Text style={dynamicStyles.text}>Password</Text>
+            <View style={dynamicStyles.passwordInputWrapper}>
+                <TextInput
+                    style={dynamicStyles.passwordInput}
                     placeholder="Password"
+                    placeholderTextColor="#aaa"
                     value={info.password}
-                    onChangeText={(text) => {
-                        setInfo((prev) => ({ ...prev, password: text }));
-                    }}
-                    onEndEditing={handlePasswordEndEditing}
+                    onChangeText={(text) => setInfo({ ...info, password: text })}
+                    onEndEditing={() => validatePassword(info.password)}
                     secureTextEntry={!showPassword}
                 />
                 <TouchableOpacity 
-                    onPress={handleTogglePassword}
-                    style={styles.toggleButton}
+                    onPress={() => setShowPassword(!showPassword)}
+                    style={dynamicStyles.toggleButton}
                 >
-                    <Text style={styles.passwordText}>{showPassword ? 'Hide' : 'Show'}</Text>
+                    <Text style={dynamicStyles.passwordText}>
+                        {showPassword ? 'Hide' : 'Show'}
+                    </Text>
                 </TouchableOpacity>
             </View>
     
             <TouchableOpacity  
-                style={[styles.loginButton, styles.button, !isFormValid && styles.disabledButton]} 
+                style={[dynamicStyles.loginButton, !isFormValid && dynamicStyles.disabledButton]} 
                 onPress={handleLogin}
                 disabled={!isFormValid}
             >
-                <Text style={[styles.loginButtonText, styles.buttonText]}>LOG IN</Text>
+                <Text style={dynamicStyles.loginButtonText}>LOG IN</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: theme === 'dark' ? '#333' : '#fff',
         justifyContent: 'center',
         alignItems: 'center',
         paddingBottom: 50,
@@ -121,6 +94,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 16,
         fontWeight: '600',
+        color: theme === 'dark' ? '#ddd' : '#333',
         alignSelf: 'flex-start',
         paddingBottom: 6,
         paddingLeft: 8,
@@ -130,7 +104,8 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         padding: 16,
         marginBottom: 20,
-        backgroundColor: '#d3d3d3',
+        backgroundColor: theme === 'dark' ? '#555' : '#eee',
+        color: theme === 'dark' ? '#fff' : '#333',
     },
     passwordInputWrapper: {
         flexDirection: 'row',
@@ -138,60 +113,47 @@ const styles = StyleSheet.create({
         borderRadius: 14,
         marginBottom: 20,
         width: '100%',
-        backgroundColor: '#d3d3d3',
+        backgroundColor: theme === 'dark' ? '#555' : '#eee',
     },
     passwordInput: {
         flex: 1,
         padding: 16,
+        color: theme === 'dark' ? '#fff' : '#333',
     },
     toggleButton: {
         padding: 16,
     },
-    button: {
+    loginButton: {
         width: '100%',
         padding: 14,
         alignItems: 'center',
         marginBottom: 10,
-    },
-    loginButton: {
-        backgroundColor: '#4cbc80',
+        backgroundColor: theme === 'dark' ? '#556' : '#888',
         borderRadius: 14,
-    },
-    createAccountButton: {
-        backgroundColor: 'white',
-        borderColor: 'black',
-        borderWidth: 2,
-        borderRadius: 14,
-    },
-    buttonText: {
-        fontWeight: 'bold',
-        fontSize: 16,
     },
     loginButtonText: {
-        color: 'white',
-    },
-    createAccountButtonText: {
-        color: 'black',
-    },
-    errorBorder: {
-        borderColor: '#8B0000',
+        fontWeight: 'bold',
+        fontSize: 16,
+        color: theme === 'dark' ? '#ddd' : '#fff',
     },
     disabledButton: {
         backgroundColor: '#a9a9a9',
     },
     passwordText: {
         fontSize: 12,
-        color: '#222222',
+        color: theme === 'dark' ? '#ddd' : '#333',
     },
     signUpText: {
         fontSize: 20,
         fontWeight: 'bold',
         paddingBottom: 50,
+        color: theme === 'dark' ? '#ddd' : '#333',
     },
     title: {
         fontSize: 30,
         paddingBottom: 40,
         fontWeight: 'bold',
-        color: '#4cbc80',
-    }
-})
+        color: theme === 'dark' ? '#4cbc80' : '#008000',
+    },
+});
+

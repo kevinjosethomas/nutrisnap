@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import Tabs from '../navigation/Tabs';
-import { AccountScreen, LoginScreen, OnboardingScreen } from '../screens'; // Import OnboardingScreen
+import { AccountScreen, CreateAccount, LoginScreen, OnboardingScreen } from '../screens'; 
 
 export default function MainNavigator() {
   const Stack = createStackNavigator();
@@ -13,7 +13,6 @@ export default function MainNavigator() {
             unmountOnBlur: true,
         }}
     >
-        {/* Add OnboardingScreen as the first screen */}
         <Stack.Screen 
             name="Onboarding"
             component={OnboardingScreen}
@@ -25,6 +24,10 @@ export default function MainNavigator() {
         <Stack.Screen 
             name="Login"
             component={LoginScreen}
+        />
+        <Stack.Screen 
+            name="Create Account"
+            component={CreateAccount}
         />
         <Stack.Screen 
             name="Account"
