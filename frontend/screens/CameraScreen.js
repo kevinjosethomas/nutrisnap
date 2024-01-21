@@ -53,7 +53,16 @@ export default function CameraScreen() {
   return (
     <View className="flex-1">
       {nutrition && (
-        <View className="absolute w-screen h-screen top-0 left-0 z-10 flex-1 flex-col justify-center items-center bg-white"></View>
+        <View className="absolute w-screen h-screen top-0 left-0 z-10 flex-1 flex-col justify-start items-center bg-white">
+          <View className="flex flex-row items-center justify-between">
+            <Text
+              className="font-bold text-2xl"
+              style={{ fontFamily: "PlusJakartaSans_700Bold" }}
+            >
+              Nutrition
+            </Text>
+          </View>
+        </View>
       )}
       <Camera
         ref={(r) => (camera = r)}

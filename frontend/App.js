@@ -2,14 +2,28 @@ import { StyleSheet, SafeAreaView } from "react-native";
 import { GlobalProvider } from "./context/GlobalState";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  useFonts,
+  PlusJakartaSans_400Regular,
+  PlusJakartaSans_500Medium,
+  PlusJakartaSans_600SemiBold,
+  PlusJakartaSans_700Bold,
+} from "@expo-google-fonts/plus-jakarta-sans";
+
 import Tabs from "./navigation/Tabs";
 
 export default function App() {
   const Tab = createBottomTabNavigator();
+  let [fontsLoaded, fontError] = useFonts({
+    PlusJakartaSans_400Regular,
+    PlusJakartaSans_500Medium,
+    PlusJakartaSans_600SemiBold,
+    PlusJakartaSans_700Bold,
+  });
 
   return (
     <GlobalProvider>
-      <SafeAreaView>
+      <SafeAreaView className="flex-1">
         <NavigationContainer>
           <Tabs />
         </NavigationContainer>

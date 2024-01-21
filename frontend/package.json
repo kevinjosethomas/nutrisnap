@@ -9,11 +9,13 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/plus-jakarta-sans": "^0.2.3",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "axios": "^1.6.5",
     "expo": "~50.0.2",
     "expo-camera": "~14.0.1",
+    "expo-font": "~11.10.2",
     "expo-haptics": "~12.8.1",
     "expo-status-bar": "~1.11.1",
     "nativewind": "^2.0.11",
