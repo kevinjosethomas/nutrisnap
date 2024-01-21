@@ -1,15 +1,20 @@
-import { Text, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { useEffect, useState } from "react";
+import * as Haptics from "expo-haptics";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
 
-import { GetNutritionInformation, ParseNutrition } from "../api/BarCode";
+import { GetNutritionInformation } from "../api/BarCode";
 
 export default function CameraScreen() {
+  let camera;
   const [scanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
   const onBarCodeScanned = async (result) => {
-    console.log("located!!");
     setScanned(true);
     const barcode = result.data;
     const data = await GetNutritionInformation(barcode);
@@ -17,19 +22,31 @@ export default function CameraScreen() {
     console.log(data[0].ingredients);
   };
 
-  useEffect(() => {
-    requestPermission();
-  }, []);
+  const onPhotoTaken = async () => {
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    const photo = await camera.takePictureAsync({
+      base64: true,
+      exif: true,
+      compress: 0,
+    });
+  };
 
   return (
     <View className="flex-1">
-      <Text>Hello</Text>
       <Camera
+        ref={(r) => (camera = r)}
         type={CameraType.back}
-        className="flex-1"
+        className="flex-1 flex-col justify-end items-center py-10 relative"
         autoFocus={AutoFocus.on}
         onBarCodeScanned={scanned ? undefined : onBarCodeScanned}
-      ></Camera>
+      >
+        <TouchableOpacity
+          onPress={onPhotoTaken}
+          className="flex items-center justify-center h-24 w-24 rounded-full border-8 border-white"
+        >
+          <View className="w-[70px] h-[70px] rounded-full bg-white"></View>
+        </TouchableOpacity>
+      </Camera>
     </View>
   );
 }
