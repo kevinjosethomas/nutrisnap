@@ -1,69 +1,113 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ProfileScreen, CameraScreen } from '../screens';
-import { Platform, Image } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function Tabs() {
     const Tab = createBottomTabNavigator();
 
   return (
     <Tab.Navigator
-          screenOptions = {{
-            tabBarInactiveTintColor: 'grey',
-            tabBarActiveTintColor: 'black',
+        screenOptions={{
             headerShown: false,
-            tabBarLabelStyle: {
-              fontSize: 11,
-              fontFamily: Platform.OS === 'android' ? 'Roboto' : 'System',
-              fontWeight: 'bold',
+            tabBarShowLabel: false,
+            tabBarStyle: {
+                position: 'absolute',
+                bottom: 25,
+                left: 20,
+                right: 20,
+                elevation: 0,
+                backgroundColor: '#ffffff',
+                borderRadius: 15,
+                height: 90,
+                ...styles.shadow
             }
-          }}
-        >
+        }}
+    >
           <Tab.Screen 
             name="Past Scans"
             component={ProfileScreen}
             options = {{
               title: "Past Scans",
-              tabBarIcon: () => (
-                <Image 
-                  source={require("../assets/PastScanTab.png")}
-                  style={{height: 30, width: 30}}
-                />
+              tabBarIcon: ({ focused }) => (
+                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                   <Image 
+                        source={require("../assets/PastScanTab.png")}
+                        resizeMode='contain'
+                        style={{
+                            width: 25,
+                            height: 25,
+                            tintColor: focused ? '#e32f45' : "#748c94"
+                        }}
+                    /> 
+                    <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
+                        PAST SCANS
+                    </Text>
+                </View> 
               )
-
             }}
           />
 
-          {/* Profile Screen */}
-          <Tab.Screen 
-            name="Scrn"
+        <Tab.Screen 
+            name="Scan"
             component={CameraScreen}
             options = {{
               title: "Scan",
-              tabBarIcon: () => (
-                <Image 
-                  source={require("../assets/CameraTab.png")}
-                  style={{height: 25, width: 25}}
-                />
+              tabBarIcon: ({ focused }) => (
+                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                   <Image 
+                        source={require("../assets/CameraTab.png")}
+                        resizeMode='contain'
+                        style={{
+                            width: 25,
+                            height: 25,
+                            tintColor: focused ? '#e32f45' : "#748c94"
+                        }}
+                    /> 
+                    <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
+                        SCAN
+                    </Text>
+                </View> 
               )
-
             }}
           />
 
-          <Tab.Screen 
+        <Tab.Screen 
             name="Account"
             component={ProfileScreen}
             options = {{
               title: "Account",
-              tabBarIcon: () => (
-                <Image 
-                  source={require("../assets/ProfileTab.png")}
-                  style={{height: 24, width: 24}}
-                />
+              tabBarIcon: ({ focused }) => (
+                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                   <Image 
+                        source={require("../assets/ProfileTab.png")}
+                        resizeMode='contain'
+                        style={{
+                            width: 25,
+                            height: 25,
+                            tintColor: focused ? '#e32f45' : "#748c94"
+                        }}
+                    /> 
+                    <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
+                        ACCOUNT
+                    </Text>
+                </View> 
               )
             }}
-          />      
-
+          />
 
         </Tab.Navigator>
   )
 }
+
+const styles = StyleSheet.create({
+    shadow: {
+        shadowColor: '#7F5DF0',
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        elevation: 5,
+    }
+})
