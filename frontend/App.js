@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import { GlobalProvider } from "./context/GlobalState";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -24,6 +24,7 @@ export default function App() {
   return (
     <GlobalProvider>
       <SafeAreaView className="flex-1">
+      <StatusBar barStyle="dark-content" />
         <NavigationContainer>
           <MainNavigator />
         </NavigationContainer>

@@ -27,6 +27,9 @@ export default function CreateAccount() {
     { key: "1", value: "Vegetarian" },
     { key: "2", value: "Vegan" },
     { key: "3", value: "Gluten Free" },
+    { key: "4", value: "Low-Carb" },
+    { key: "5", value: "Low-Sodium" },
+    { key: "6", value: "Lactose-Free" },
   ];
 
   const handleAgeChange = () => {
@@ -77,7 +80,7 @@ export default function CreateAccount() {
             Account Settings
           </Text>
         </View>
-        <View className="flex flex-col gap-y-3">
+        <View className="flex flex-col gap-y-0">
           <View className="flex flex-col">
             <Text className="text-lg font-medium mb-1">Age</Text>
             <View className="rounded-lg overflow-hidden bg-w-300">
@@ -85,6 +88,18 @@ export default function CreateAccount() {
                 className="py-4 px-4 w-full"
                 placeholder="Enter your age"
                 keyboardType="numeric"
+                onChange={handleAgeChange}
+              />
+            </View>
+          </View>
+          <View className="flex flex-col gap-y-3">
+          <View className="flex flex-col">
+            <Text className="text-lg font-medium mb-1">Gender</Text>
+            <View className="rounded-lg overflow-hidden bg-w-300">
+              <TextInput
+                className="py-4 px-4 w-full"
+                placeholder="Enter your gender"
+
                 onChange={handleAgeChange}
               />
             </View>
@@ -129,6 +144,7 @@ export default function CreateAccount() {
         <View className="flex items-end mt-3">
           <Text className="text-g-600 font-medium">Automatically Saved</Text>
         </View>
+      </View>
       </View>
     </TouchableWithoutFeedback>
   );
