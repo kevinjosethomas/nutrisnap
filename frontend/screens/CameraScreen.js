@@ -47,6 +47,8 @@ export default function CameraScreen() {
     setNutrition({
       ...data,
     });
+
+    navigation.navigate("Nutrition Page");
   };
 
   const onPhotoTaken = async () => {
