@@ -6,3 +6,4 @@ export { default as AccountScreen } from "./AccountScreen";
 export { default as CreateAccount } from "./CreateAccount";
 export { default as GetInfoScreen } from "./GetInfoScreen";
 export { default as OnboardingScreen } from './onboarding/OnboardingScreen';
+export { default as PastScansScreen } from './PastScansScreen';
