@@ -16,7 +16,7 @@ export default function AccountScreen() {
                     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
                         <Text style={styles.buttonText}>LOG IN</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Get Info')}>
                         <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
                     </TouchableOpacity>
                 </View>
@@ -96,5 +96,6 @@ const styles = StyleSheet.create({
       text: {
         fontSize: 18,
         fontWeight: 'light',
+        paddingLeft: 10,
       }
 })

@@ -3,16 +3,13 @@ import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-nativ
 import { useNavigation } from '@react-navigation/native';
 import { GlobalContext } from '../context/GlobalState';
 
-export default function LogIn() {
+export default function CreateAccount() {
     const navigation = useNavigation(); 
     const [showPassword, setShowPassword] = useState(false);
-    const { setLogIn} = useContext(GlobalContext);
-
     const [info, setInfo] = useState({
         email: '',
         password: '',
     });
-
     const [validation, setValidation] = useState({
         isEmailValid: true,
         isPasswordValid: true
@@ -21,34 +18,21 @@ export default function LogIn() {
     const isFormValid = validation.isEmailValid && validation.isPasswordValid;
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-    const handleLogin = () => {
-        setInfo({email: '', password: ''});
+    const handleSignUp = () => {
+        setInfo({ email: '', password: '' });
+        navigation.navigate("Tabs");    
+    };
 
-        const password = true;
-        if (password) {
-           setLogIn(true); 
-           navigation.navigate('Account');
-        } else {
-
-        }
-        
-    };  
-    
     const validateEmail = (email) => {
         setValidation((prev) => ({ ...prev, isEmailValid: emailRegex.test(email) }));
+        setInfo((prev) => ({ ...prev, email }));
     };
 
-     const validatePassword = (password) => {
+    const validatePassword = (password) => {
         setValidation((prev) => ({ ...prev, isPasswordValid: password.length >= 7 }));
+        setInfo((prev) => ({ ...prev, password }));
     };
 
-    const handleEmailEndEditing = () => {
-        validateEmail(info.email);
-    };
-
-    const handlePasswordEndEditing = () => {
-        validatePassword(info.password);
-    };
     const handleTogglePassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
@@ -61,33 +45,23 @@ export default function LogIn() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Calorie Tracker</Text>
-            <Text style={styles.signUpText}>Sign In</Text>
+            <Text style={styles.signUpText}>Sign Up</Text>
             <Text style={styles.text}>Email</Text>
             <TextInput
-                style={
-                    styles.emailInput
-                }
+                style={styles.emailInput}
                 placeholder="Email"
                 value={info.email}
-                onChangeText={(text) => {
-                    setInfo((prev) => ({ ...prev, email: text }));
-                }}
-                onEndEditing={handleEmailEndEditing}
+                onChangeText={validateEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
             />
             <Text style={styles.text}>Password</Text>
-            <View style={
-                styles.passwordInputWrapper
-            }>
-            <TextInput
-                    style={styles.passwordInput }
+            <View style={styles.passwordInputWrapper}>
+                <TextInput
+                    style={styles.passwordInput}
                     placeholder="Password"
                     value={info.password}
-                    onChangeText={(text) => {
-                        setInfo((prev) => ({ ...prev, password: text }));
-                    }}
-                    onEndEditing={handlePasswordEndEditing}
+                    onChangeText={validatePassword}
                     secureTextEntry={!showPassword}
                 />
                 <TouchableOpacity 
@@ -97,13 +71,12 @@ export default function LogIn() {
                     <Text style={styles.passwordText}>{showPassword ? 'Hide' : 'Show'}</Text>
                 </TouchableOpacity>
             </View>
-    
             <TouchableOpacity  
                 style={[styles.loginButton, styles.button, !isFormValid && styles.disabledButton]} 
-                onPress={handleLogin}
+                onPress={handleSignUp}
                 disabled={!isFormValid}
             >
-                <Text style={[styles.loginButtonText, styles.buttonText]}>LOG IN</Text>
+                <Text style={[styles.loginButtonText, styles.buttonText]}>CONTINUE</Text>
             </TouchableOpacity>
         </View>
     );

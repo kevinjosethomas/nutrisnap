@@ -22,12 +22,12 @@ export const GlobalProvider = ({ children }) => {
         });
     }
 
-    function setAge(age) {
+    const setAge = (age) => {
         dispatch({
             type: 'SET_AGE',
             payload: age,
-        })
-    }
+        });
+    };
 
     function setDietaryRestrictions(restrictions) {
         dispatch({
@@ -58,19 +58,20 @@ export const GlobalProvider = ({ children }) => {
     }
 
     return (
-        <GlobalContext.Provider value = {{
-            age: state.age,
-            weight: state.weight,
-            dietaryRestrictions: state.dietaryRestrictions,
-            calorieTarget: state.calorieTarget,
-            pastScans: state.pastScans,
-            setAge,
-            setDietaryRestrictions,
-            setWeight,
-            setCalorieTarget,
-            addScan,
-            setLogIn,
-        }}>
+        <GlobalContext.Provider 
+            value = {{
+                age: state.age,
+                weight: state.weight,
+                dietaryRestrictions: state.dietaryRestrictions,
+                calorieTarget: state.calorieTarget,
+                pastScans: state.pastScans,
+                setAge,
+                setDietaryRestrictions,
+                setWeight,
+                setCalorieTarget,
+                addScan,
+                setLogIn,
+            }}>
             {children}
         </GlobalContext.Provider>
     )
