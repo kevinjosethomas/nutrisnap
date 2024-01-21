@@ -24,6 +24,13 @@ export default function CameraScreen() {
     requestPermission();
   }, []);
 
+  //Carbs 225-325 grams
+  //Fat 44-78 grams
+  //Fiber 25-30 grams
+  //Proteins 60 grams or 0.8 x bodyweight (kg)
+  //Salt 2000mg
+  //sugar 25-36 depending on male/female
+
   const route = useRoute();
 
   useFocusEffect(

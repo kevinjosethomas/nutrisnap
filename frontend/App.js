@@ -1,7 +1,7 @@
 import { StyleSheet, SafeAreaView } from "react-native";
 import { GlobalProvider } from "./context/GlobalState";
 import { NavigationContainer } from "@react-navigation/native";
-import Tabs from './navigation/Tabs';
+import Tabs from "./navigation/Tabs";
 import {
   useFonts,
   PlusJakartaSans_400Regular,
@@ -12,7 +12,6 @@ import {
 } from "@expo-google-fonts/plus-jakarta-sans";
 
 export default function App() {
-
   let [fontsLoaded, fontError] = useFonts({
     PlusJakartaSans_400Regular,
     PlusJakartaSans_500Medium,
