@@ -1,6 +1,6 @@
-import { TouchableOpacity, View } from "react-native";
-import { useEffect, useState } from "react";
 import * as Haptics from "expo-haptics";
+import { useEffect, useState } from "react";
+import { TouchableOpacity, View } from "react-native";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
 
 import { GetNutritionInformation } from "../api/BarCode";
@@ -19,7 +19,10 @@ export default function CameraScreen() {
     console.log("hello");
     setScanned(true);
     const barcode = result.data;
-    const data = await GetNutritionInformation(barcode);
+    const { name, ingredients, nutrition, nutritionString } =
+      await GetNutritionInformation(barcode);
+
+    const data = await GenerateAdvisory(name, ingredients, nutritionString);
 
     console.log(data);
   };
