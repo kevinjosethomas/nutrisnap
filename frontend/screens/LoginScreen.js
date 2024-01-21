@@ -5,7 +5,7 @@ import { GlobalContext } from '../context/GlobalState';
 
 export default function LogIn() {
     const navigation = useNavigation();
-    const { setLogIn, theme } = useContext(GlobalContext);
+    const { setLogIn, theme, isLoggedIn } = useContext(GlobalContext);
 
     const [showPassword, setShowPassword] = useState(false);
     const [info, setInfo] = useState({ email: '', password: '' });
@@ -16,7 +16,7 @@ export default function LogIn() {
 
     const handleLogin = () => {
         setLogIn(true);
-        navigation.navigate('Account');
+        navigation.navigate('Tabs');
     };
 
     const validateEmail = (email) => {
@@ -44,7 +44,9 @@ export default function LogIn() {
                 placeholder="Email"
                 placeholderTextColor="#aaa"
                 value={info.email}
-                onChangeText={(text) => setInfo({ ...info, email: text })}
+                onChangeText={(text) => 
+                    setInfo({ ...info, email: text }
+                )}
                 onEndEditing={() => validateEmail(info.email)}
                 keyboardType="email-address"
                 autoCapitalize="none"
