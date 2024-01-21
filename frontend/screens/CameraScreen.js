@@ -74,8 +74,8 @@ export default function CameraScreen() {
       quality: 0,
     });
     camera.pausePreview();
-    // const image = "data:image/jpg;base64," + photo;
     const data = await IdentifyMeal(photo.base64);
+    addScan({ ...data });
     navigation.navigate("Nutrition Page", { ...data });
   };
 
