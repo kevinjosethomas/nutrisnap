@@ -21,11 +21,11 @@ export default function CameraScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      if (route.params?.takePhoto) {
-        onPhotoTaken();
-      }
+        if (route.params?.takePhoto) {
+            onPhotoTaken();
+        }
     }, [route.params?.takePhoto])
-  );
+);
 
   const onBarCodeScanned = async (result) => {
     console.log("hello");

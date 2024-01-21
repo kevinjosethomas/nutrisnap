@@ -11,7 +11,13 @@ const CustomTabBarButton = ({children, onPress, focused}) => (
             alignItems: 'center',
             ...styles.shadow
         }}
-        onPress={onPress}
+        onPress={() => {
+            if (focused) {
+                onPress('double'); 
+            } else {
+                onPress(); 
+            }
+        }}
     >
         <View style={{
             width: 70,
@@ -92,9 +98,9 @@ export default function Tabs() {
                     <CustomTabBarButton 
                         {...props} 
                         focused={props.accessibilityState.selected} 
-                        onPress={() => {
-                            if (props.accessibilityState.selected) {
-                                navigation.navigate('Scan', { takePhoto: new Date().getTime() });
+                        onPress={(action) => {
+                            if (action === 'double') {
+                                navigation.navigate('Scan', { takePhoto: true });
                             } else {
                                 navigation.navigate('Scan');
                             }
