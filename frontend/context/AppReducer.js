@@ -4,6 +4,8 @@ function AppReducer(state, action) {
             return {
                 ...state,
                 pastScans: [action.payload, ...state.pastScans],
-            }
+            };
+
+        
     }
 }
