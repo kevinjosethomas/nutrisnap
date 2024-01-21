@@ -51,6 +51,7 @@ export default function CameraScreen() {
     if (!d) {
       camera.resumePreview();
       setScanned(false);
+      return;
     }
 
     const { name, ingredients, nutrition, nutritionString } = d;
