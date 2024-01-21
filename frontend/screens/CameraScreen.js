@@ -1,13 +1,15 @@
 import * as Haptics from "expo-haptics";
 import { useEffect, useState, useCallback } from "react";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
-import { TouchableOpacity, View, Text } from "react-native";
-import { useRoute, useFocusEffect } from "@react-navigation/native";
+import { View, Text } from "react-native";
+import { useRoute, useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import { GenerateAdvisory } from "../api/OpenAI";
 import { GetNutritionInformation } from "../api/BarCode";
 
 export default function CameraScreen() {
+  const navigation = useNavigation();
+
   let camera;
   const [scanned, setScanned] = useState(false);
   const [nutrition, setNutrition] = useState(false);
@@ -48,6 +50,8 @@ export default function CameraScreen() {
       exif: true,
       compress: 0,
     });
+
+    navigation.navigate('Nutrition Page', "ENTER PROPS HERE");
   };
 
   return (
