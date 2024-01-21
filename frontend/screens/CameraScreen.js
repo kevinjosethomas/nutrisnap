@@ -1,6 +1,6 @@
 import * as Haptics from "expo-haptics";
 import { TouchableOpacity, View } from "react-native";
-import { useEffect, useState, React } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
 import { useRoute, useFocusEffect } from "@react-navigation/native";
 
@@ -19,7 +19,7 @@ export default function CameraScreen() {
   const route = useRoute();
 
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       if (route.params?.takePhoto) {
         onPhotoTaken();
       }
