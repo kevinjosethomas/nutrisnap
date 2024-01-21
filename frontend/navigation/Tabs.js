@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ProfileScreen, CameraScreen, CameraStack } from "../screens";
+import { ProfileScreen, CameraStack } from "../screens";
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 

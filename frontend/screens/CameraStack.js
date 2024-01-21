@@ -1,7 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import CameraScreen from "./CameraScreen";
 import NutritionPage from "./NutritionPage";
-import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Stack = createStackNavigator();
 

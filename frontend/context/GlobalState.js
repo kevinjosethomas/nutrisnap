@@ -9,7 +9,7 @@ const initialState = {
     calorieTarget: undefined,
 }
 
-const GlobalContext = createContext(initialState);
+export const GlobalContext = createContext(initialState);
 
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
