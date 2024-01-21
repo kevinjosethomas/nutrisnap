@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 import AppReducer from './AppReducer';
 
 const initialState = {
@@ -17,7 +17,7 @@ export const GlobalProvider = ({ children }) => {
     function addScan(scanInfo) {
         dispatch({
             type: 'ADD_SCAN',
-            payload: x,
+            payload: scanInfo,
         });
     }
 
