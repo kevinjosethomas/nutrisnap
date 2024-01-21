@@ -12,7 +12,6 @@ import {
 import MainNavigator from "./navigation/MainNavigator";
 
 export default function App() {
-
   let [fontsLoaded, fontError] = useFonts({
     PlusJakartaSans_400Regular,
     PlusJakartaSans_500Medium,

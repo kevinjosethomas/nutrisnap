@@ -24,14 +24,18 @@ export default function CameraScreen() {
     requestPermission();
   }, []);
 
+  //Carbs 225-325 grams
+  //Fat 44-78 grams
+  //Fiber 25-30 grams
+  //Proteins 60 grams or 0.8 x bodyweight (kg)
+  //Salt 2000mg
+  //sugar 25-36 depending on male/female
+
   const route = useRoute();
 
   useFocusEffect(
     useCallback(() => {
       setScanned(false);
-      if (camera) {
-        camera.resumePreview();
-      }
       if (route.params?.takePhoto) {
         onPhotoTaken();
       }
@@ -72,8 +76,8 @@ export default function CameraScreen() {
         <Camera
           ref={(r) => setCamera(r)}
           type={CameraType.back}
-          className="flex-1 flex-col justify-end items-center py-10 relative"
           autoFocus={AutoFocus.on}
+          className="flex-1 flex-col justify-end items-center py-10 relative"
           onBarCodeScanned={scanned ? undefined : onBarCodeScanned}
         />
       )}
