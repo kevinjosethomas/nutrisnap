@@ -1,9 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import Tabs from '../navigation/Tabs';
-import { AccountScreen, LoginScreen, CreateAccount, GetInfoScreen } from '../screens';
+import { AccountScreen, LoginScreen } from '../screens';
 
 export default function MainNavigator() {
-    const Stack = createStackNavigator();
+  const Stack = createStackNavigator();
 
     return (
         <Stack.Navigator
@@ -13,7 +13,6 @@ export default function MainNavigator() {
                 unmountOnBlur: true,
             }}
         >
-            
             <Stack.Screen 
                 name="Tabs"
                 component={Tabs}
@@ -22,21 +21,8 @@ export default function MainNavigator() {
                 name="Login"
                 component={LoginScreen}
             />
-            <Stack.Screen 
-                name="Create Account"
-                component={CreateAccount}
-            />
 
-            <Stack.Screen 
-                name="Get Info"
-                component={GetInfoScreen}
-            />
-
-            <Stack.Screen 
-                name="Account"
-                component={AccountScreen}
-            />
-
-        </Stack.Navigator>
-    )
+      <Stack.Screen name="Account" component={AccountScreen} />
+    </Stack.Navigator>
+  );
 }

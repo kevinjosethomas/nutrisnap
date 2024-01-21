@@ -1,6 +1,7 @@
 import { StyleSheet, SafeAreaView } from "react-native";
 import { GlobalProvider } from "./context/GlobalState";
 import { NavigationContainer } from "@react-navigation/native";
+
 import {
   useFonts,
   PlusJakartaSans_400Regular,

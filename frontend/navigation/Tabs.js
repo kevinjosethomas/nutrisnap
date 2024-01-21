@@ -1,37 +1,42 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { CameraStack, AccountScreen } from "../screens";
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Image, View, TouchableOpacity } from "react-native";
 
-const CustomTabBarButton = ({children, onPress, focused}) => (
-    <TouchableOpacity
-        style={{
-            top: -20,
-            justifyContent: 'center',
-            alignItems: 'center',
-            ...styles.shadow
-        }}
-        onPress={() => {
-            if (focused) {
-                onPress('double'); 
-            } else {
-                onPress(); 
-            }
-        }}
+import User from "../assets/icons/user.png";
+import UserActive from "../assets/icons/user-active.png";
+import History from "../assets/icons/history.png";
+import HistoryActive from "../assets/icons/history-active.png";
+import Camera from "../assets/icons/camera.png";
+
+const CustomTabBarButton = ({ children, onPress, focused }) => (
+  <TouchableOpacity
+    style={{
+      top: -20,
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+    onPress={() => {
+      if (focused) {
+        onPress("double");
+      } else {
+        onPress();
+      }
+    }}
+  >
+    <View
+      style={{
+        width: 80,
+        height: 80,
+        borderRadius: 80,
+        backgroundColor: focused ? "#059669" : "#748c94",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
-        <View style={{
-            width: 70,
-            height: 70,
-            borderRadius: 35,
-            backgroundColor: focused ? '#e32f45' : "#748c94", 
-            borderColor: focused ? '#e32f45' : "#748c94", 
-            borderWidth: 2, 
-            justifyContent: 'center',
-            alignItems: 'center',
-        }}>
-            {children}
-        </View>
-    </TouchableOpacity>
-)
+      {children}
+    </View>
+  </TouchableOpacity>
+);
 
 export default function Tabs() {
   const Tab = createBottomTabNavigator();
@@ -43,14 +48,11 @@ export default function Tabs() {
         tabBarShowLabel: false,
         tabBarStyle: {
           position: "absolute",
-          bottom: 25,
-          left: 20,
-          right: 20,
           elevation: 0,
           backgroundColor: "#ffffff",
-          borderRadius: 15,
-          height: 90,
-          ...styles.shadow,
+          borderTopEndRadius: 15,
+          borderTopStartRadius: 15,
+          height: 72,
         },
       }}
     >
@@ -68,55 +70,43 @@ export default function Tabs() {
               }}
             >
               <Image
-                source={require("../assets/PastScanTab.png")}
-                resizeMode="contain"
-                style={{
-                  width: 35,
-                  height: 35,
-                  tintColor: focused ? "#e32f45" : "#748c94",
-                }}
+                source={focused ? HistoryActive : History}
+                style={{ width: 40, height: 40 }}
               />
-              <Text
-                style={{ color: focused ? "#e32f45" : "#748c94", fontSize: 12 }}
-              >
-                PAST SCANS
-              </Text>
             </View>
           ),
         }}
       />
 
-        <Tab.Screen 
-            name="Scan" 
-            component={CameraStack}
-            options={({ navigation, route }) => ({
-                tabBarIcon: ({ focused }) => (
-                    <Image 
-                        source={require("../assets/CameraTab.png")}
-                        resizeMode='contain'
-                        style={{
-                            width: 30,
-                            height: 30,
-                            tintColor: 'white',
-                        }}
-                    />
-                ),
-                tabBarButton: (props) => (
-                    <CustomTabBarButton 
-                        {...props} 
-                        focused={props.accessibilityState.selected} 
-                        onPress={(action) => {
-                            if (action === 'double') {
-                                navigation.navigate('Scan', { takePhoto: true });
-
-                            } else {
-                                navigation.navigate('Scan');
-                            }
-                        }}
-                    />
-                )
-            })}
-        />
+      <Tab.Screen
+        name="Scan"
+        component={CameraStack}
+        options={({ navigation, route }) => ({
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={Camera}
+              resizeMode="contain"
+              style={{
+                width: 40,
+                height: 40,
+              }}
+            />
+          ),
+          tabBarButton: (props) => (
+            <CustomTabBarButton
+              {...props}
+              focused={props.accessibilityState.selected}
+              onPress={(action) => {
+                if (action === "double") {
+                  navigation.navigate("Scan", { takePhoto: true });
+                } else {
+                  navigation.navigate("Scan");
+                }
+              }}
+            />
+          ),
+        })}
+      />
 
       <Tab.Screen
         name="Account"
@@ -132,19 +122,9 @@ export default function Tabs() {
               }}
             >
               <Image
-                source={require("../assets/ProfileTab.png")}
-                resizeMode="contain"
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? "#e32f45" : "#748c94",
-                }}
+                source={focused ? UserActive : User}
+                style={{ width: 40, height: 40 }}
               />
-              <Text
-                style={{ color: focused ? "#e32f45" : "#748c94", fontSize: 12 }}
-              >
-                ACCOUNT
-              </Text>
             </View>
           ),
         }}
@@ -152,16 +132,3 @@ export default function Tabs() {
     </Tab.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: "#7F5DF0",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 5,
-  },
-});

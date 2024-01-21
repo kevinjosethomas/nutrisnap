@@ -9,6 +9,10 @@ async function GetNutritionInformation(barcode) {
 }
 
 function ParseNutrition(data) {
+  if (!data.product) {
+    return null;
+  }
+
   const nutriments = data.product.nutriments || {
     carbohydrates: 0, // yelllow
     carbohydrates_unit: "g",
