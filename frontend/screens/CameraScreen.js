@@ -3,6 +3,8 @@ import * as Haptics from "expo-haptics";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
 import { useEffect, useState, useCallback } from "react";
 import { IdentifyMeal } from "../api/LogMeal";
+import React, { useContext } from 'react';
+import { GlobalContext } from '../context/GlobalState';
 
 import {
   useRoute,
@@ -15,6 +17,7 @@ import { GenerateAdvisory } from "../api/OpenAI";
 import { GetNutritionInformation } from "../api/BarCode";
 
 export default function CameraScreen() {
+  const { addScan } = useContext(GlobalContext);
   const route = useRoute();
   const navigation = useNavigation();
   const isFocused = useIsFocused();
@@ -52,6 +55,8 @@ export default function CameraScreen() {
     const { name, ingredients, nutrition, nutritionString } = d;
 
     const data = await GenerateAdvisory(name, ingredients, nutritionString);
+
+    addScan({...data, name, ingredients, nutrition});
 
     navigation.navigate("Nutrition Page", {
       ...data,
