@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ProfileScreen, CameraScreen } from "../screens";
+import { ProfileScreen, CameraScreen, CameraStack } from "../screens";
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 
@@ -89,7 +89,7 @@ export default function Tabs() {
 
         <Tab.Screen 
             name="Scan" 
-            component={CameraScreen}
+            component={CameraStack}
             options={({ navigation, route }) => ({
                 tabBarIcon: ({ focused }) => (
                     <Image 
@@ -109,7 +109,7 @@ export default function Tabs() {
                         onPress={(action) => {
                             if (action === 'double') {
                                 navigation.navigate('Scan', { takePhoto: true });
-                                
+
                             } else {
                                 navigation.navigate('Scan');
                             }
