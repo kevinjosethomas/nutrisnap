@@ -25,7 +25,7 @@ function AppReducer(state, action) {
                 ...state,
                 calorieTarget: action.payload,
             };
-
-        
+        default:
+            return state;
     }
 }

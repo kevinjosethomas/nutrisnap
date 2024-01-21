@@ -1,7 +1,7 @@
 import { StyleSheet, SafeAreaView } from "react-native";
 import { GlobalProvider } from "./context/GlobalState";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Tabs from './navigation/Tabs';
 import {
   useFonts,
   PlusJakartaSans_400Regular,
@@ -11,10 +11,8 @@ import {
   PlusJakartaSans_800ExtraBold,
 } from "@expo-google-fonts/plus-jakarta-sans";
 
-import Tabs from "./navigation/Tabs";
-
 export default function App() {
-  const Tab = createBottomTabNavigator();
+
   let [fontsLoaded, fontError] = useFonts({
     PlusJakartaSans_400Regular,
     PlusJakartaSans_500Medium,
