@@ -1,7 +1,8 @@
 import { TouchableOpacity, View } from "react-native";
-import { useEffect, useState } from "react";
+import { useEffect, useState, React } from "react";
 import * as Haptics from "expo-haptics";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
+import { useRoute, useFocusEffect } from '@react-navigation/native';
 
 import { GetNutritionInformation } from "../api/BarCode";
 
@@ -14,6 +15,16 @@ export default function CameraScreen() {
   useEffect(() => {
     requestPermission();
   }, []);
+
+  const route = useRoute();
+
+    useFocusEffect(
+        React.useCallback(() => {
+            if (route.params?.takePhoto) {
+                onPhotoTaken();
+            }
+        }, [route.params?.takePhoto])
+    );
 
   const onBarCodeScanned = async (result) => {
     console.log("hello");

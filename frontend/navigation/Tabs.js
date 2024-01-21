@@ -89,34 +89,13 @@ export default function Tabs() {
                     />
                 ),
                 tabBarButton: (props) => (
-                    <CustomTabBarButton {...props} focused={props.accessibilityState.selected} />
+                    <CustomTabBarButton 
+                        {...props} 
+                        focused={props.accessibilityState.selected} 
+                    />
                 )
             })}
         />
-
-        {/* <Tab.Screen 
-            name="Scan"
-            component={CameraScreen}
-            options = {{
-              title: "Scan",
-              tabBarIcon: ({ focused }) => (
-                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                   <Image 
-                        source={require("../assets/CameraTab.png")}
-                        resizeMode='contain'
-                        style={{
-                            width: 25,
-                            height: 25,
-                            tintColor: focused ? '#e32f45' : "#748c94"
-                        }}
-                    /> 
-                    <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                        SCAN
-                    </Text>
-                </View> 
-              )
-            }}
-          /> */}
 
         <Tab.Screen 
             name="Account"
