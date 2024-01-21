@@ -1,8 +1,6 @@
 import * as Haptics from "expo-haptics";
-import { useEffect, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { useEffect, useState, React } from "react";
-import * as Haptics from "expo-haptics";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
 import { useRoute, useFocusEffect } from "@react-navigation/native";
 
