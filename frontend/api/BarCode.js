@@ -23,7 +23,7 @@ function ParseNutrition(data) {
 
   let nutritionString = "";
   for (const [key, value] of Object.entries(nutrition)) {
-    nutritionString += `${key}: ${value.join("")}`;
+    nutritionString += `${key}: ${value.join("")} `;
   }
 
   return {
