@@ -1,7 +1,6 @@
 import { StyleSheet, SafeAreaView } from "react-native";
 import { GlobalProvider } from "./context/GlobalState";
 import { NavigationContainer } from "@react-navigation/native";
-import Tabs from './navigation/Tabs';
 import {
   useFonts,
   PlusJakartaSans_400Regular,
@@ -10,6 +9,7 @@ import {
   PlusJakartaSans_700Bold,
   PlusJakartaSans_800ExtraBold,
 } from "@expo-google-fonts/plus-jakarta-sans";
+import MainNavigator from "./navigation/MainNavigator";
 
 export default function App() {
 
@@ -25,7 +25,7 @@ export default function App() {
     <GlobalProvider>
       <SafeAreaView className="flex-1">
         <NavigationContainer>
-          <Tabs />
+          <MainNavigator />
         </NavigationContainer>
       </SafeAreaView>
     </GlobalProvider>
