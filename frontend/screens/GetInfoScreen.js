@@ -126,6 +126,9 @@ export default function CreateAccount() {
             </View>
           </View>
         </View>
+        <View className="flex items-end mt-3">
+          <Text className="text-g-600 font-medium">Automatically Saved</Text>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
