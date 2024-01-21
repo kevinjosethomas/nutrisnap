@@ -2,7 +2,7 @@ import { View } from "react-native";
 import * as Haptics from "expo-haptics";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
 import { useEffect, useState, useCallback } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { IdentifyMeal } from "../api/LogMeal";
 
 import {
   useRoute,
@@ -26,10 +26,6 @@ export default function CameraScreen() {
   useEffect(() => {
     requestPermission();
   }, []);
-
-  useEffect(() => {
-    console.log(route.params);
-  });
 
   useFocusEffect(
     useCallback(() => {
@@ -66,16 +62,14 @@ export default function CameraScreen() {
   };
 
   const onPhotoTaken = async () => {
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    const photo = await camera.takePictureAsync({
-      base64: true,
-      exif: true,
-      compress: 0,
-    });
-    camera.pausePreview();
-
-    const image = new Image("data:image/jpg;base64," + photo);
-
+    // Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    // const photo = await camera.takePictureAsync({
+    //   exif: true,
+    //   quality: 0,
+    // });
+    // camera.pausePreview();
+    // // const image = "data:image/jpg;base64," + photo;
+    // await IdentifyMeal(photo.uri);
     // navigation.navigate("Nutrition Page");
   };
 
