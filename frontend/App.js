@@ -24,7 +24,6 @@ export default function App() {
             }
           }}
         >
-
           <Tab.Screen 
             name="Past Scans"
             component={ProfileScreen}
