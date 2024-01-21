@@ -29,9 +29,6 @@ export default function CameraScreen() {
   useFocusEffect(
     useCallback(() => {
       setScanned(false);
-      if (camera) {
-        camera.resumePreview();
-      }
       if (route.params?.takePhoto) {
         onPhotoTaken();
       }
@@ -72,8 +69,8 @@ export default function CameraScreen() {
         <Camera
           ref={(r) => setCamera(r)}
           type={CameraType.back}
-          className="flex-1 flex-col justify-end items-center py-10 relative"
           autoFocus={AutoFocus.on}
+          className="flex-1 flex-col justify-end items-center py-10 relative"
           onBarCodeScanned={scanned ? undefined : onBarCodeScanned}
         />
       )}
