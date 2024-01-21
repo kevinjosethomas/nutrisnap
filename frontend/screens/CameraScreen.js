@@ -8,6 +8,7 @@ import { GetNutritionInformation } from "../api/BarCode";
 export default function CameraScreen() {
   let camera;
   const [scanned, setScanned] = useState(false);
+  const [nutrition, setNutrition] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
   useEffect(() => {
@@ -15,11 +16,12 @@ export default function CameraScreen() {
   }, []);
 
   const onBarCodeScanned = async (result) => {
+    console.log("hello");
     setScanned(true);
     const barcode = result.data;
     const data = await GetNutritionInformation(barcode);
 
-    console.log(data[0].ingredients);
+    console.log(data);
   };
 
   const onPhotoTaken = async () => {
