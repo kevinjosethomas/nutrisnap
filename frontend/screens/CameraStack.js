@@ -7,7 +7,11 @@ const Stack = createStackNavigator();
 
 export default function CameraStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+        screenOptions={{
+            headerShown: false, 
+        }}
+    >
       <Stack.Screen name="Camera Screen" component={CameraScreen} />
       <Stack.Screen
         name="Nutrition Page"
@@ -28,3 +32,12 @@ export default function CameraStack() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+    backButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginLeft: 10,
+    },
+  
+  });
