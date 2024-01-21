@@ -2,6 +2,8 @@ import { View } from "react-native";
 import * as Haptics from "expo-haptics";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
 import { useEffect, useState, useCallback } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import {
   useRoute,
   useFocusEffect,
@@ -84,7 +86,7 @@ export default function CameraScreen() {
           ref={(r) => setCamera(r)}
           type={CameraType.back}
           autoFocus={AutoFocus.on}
-          className="flex-1 flex-col justify-end items-center py-10 relative"
+          className="flex-1 flex-col justify-end items-center py-10 relative rounded-3xl overflow-hidden"
           onBarCodeScanned={scanned ? undefined : onBarCodeScanned}
         />
       )}
