@@ -3,8 +3,8 @@ import * as Haptics from "expo-haptics";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
 import { useEffect, useState, useCallback } from "react";
 import { IdentifyMeal } from "../api/LogMeal";
-import React, { useContext } from 'react';
-import { GlobalContext } from '../context/GlobalState';
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 
 import {
   useRoute,
@@ -56,7 +56,7 @@ export default function CameraScreen() {
 
     const data = await GenerateAdvisory(name, ingredients, nutritionString);
 
-    addScan({...data, name, ingredients, nutrition});
+    addScan({ ...data, name, ingredients, nutrition });
 
     navigation.navigate("Nutrition Page", {
       ...data,
@@ -67,15 +67,16 @@ export default function CameraScreen() {
   };
 
   const onPhotoTaken = async () => {
-    // Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    // const photo = await camera.takePictureAsync({
-    //   exif: true,
-    //   quality: 0,
-    // });
-    // camera.pausePreview();
-    // // const image = "data:image/jpg;base64," + photo;
-    // await IdentifyMeal(photo.uri);
-    // navigation.navigate("Nutrition Page");
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    const photo = await camera.takePictureAsync({
+      base64: true,
+      exif: true,
+      quality: 0,
+    });
+    camera.pausePreview();
+    // const image = "data:image/jpg;base64," + photo;
+    const data = await IdentifyMeal(photo.base64);
+    navigation.navigate("Nutrition Page", { ...data });
   };
 
   return (

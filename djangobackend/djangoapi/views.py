@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from io import BytesIO
 from .serializers import ImageUploadSerializer
 
 import requests
@@ -12,6 +13,7 @@ from PIL import Image
 import piexif
 import json
 from openai import OpenAI
+import base64
 
 
 # takes in an image
@@ -20,7 +22,7 @@ def process_image(image):
     headers = {"Authorization": "APIUser_Carson " + api_user_token}
 
     # Load image
-    im = Image.open(image)
+    im = Image.open(BytesIO(base64.b64decode(image)))
     # path = "imgs/apples.jpg"
 
     # [IMPORTANT to keep image orientation] get exif information
@@ -109,6 +111,8 @@ class ProcessImageView(APIView):
 
 @api_view(["POST"])
 def process(request):
-    nutrition = process_image(request.data["file"].file)
+    print(request)
+    print(request.data)
+    nutrition = process_image(request.data["img"])
     print(nutrition)
     return Response(json.loads(nutrition))

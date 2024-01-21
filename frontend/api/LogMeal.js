@@ -14,56 +14,60 @@ function DataURIToBlob(dataURI) {
   return new Blob([ia], { type: mimeString });
 }
 
-// async function IdentifyMeal(image) {
-//   console.log("hi");
-//   const formData = new FormData();
-//   const i = DataURIToBlob(image);
-//   formData.append("image", i, "IMAGE.jpg");
+async function IdentifyMeal(image) {
+  // console.log("hi");
+  // const formData = new FormData();
+  // const i = DataURIToBlob(image);
+  // console.log(i);
+  // formData.append("file", i, "IMAGE.jpg");
 
+  // console.log("hi2");
+
+  try {
+    const response = await fetch(
+      "https://4b5d-128-189-26-186.ngrok-free.app/api/process/",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          img: image,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+// async function IdentifyMeal(image) {
 //   try {
-//     const response = await fetch(
+//     console.log("hi1");
+//     const response = await FileSystem.uploadAsync(
 //       "https://api.logmeal.es/v2/image/segmentation/complete",
+//       image,
 //       {
-//         method: "POST",
-//         formData,
+//         fieldName: "image",
+//         httpMethod: "POST",
+//         uploadType: FileSystem.FileSystemUploadType.MULTIPART,
 //         headers: {
 //           Authorization: `APIUser_Carson ${process.env.EXPO_PUBLIC_LOGMEAL_API_KEY}`,
 //         },
 //       }
 //     );
+//     console.log("hi2");
 
-//     const data = await response.text();
-//     console.log(data);
+//     console.log(JSON.stringify(response));
+//     console.log(response.body);
 //   } catch (e) {
 //     console.log(e);
+//     console.log(e.response);
 //   }
-
-//   console.log("hi3");
 // }
-
-async function IdentifyMeal(image) {
-  try {
-    console.log("hi1");
-    const response = await FileSystem.uploadAsync(
-      "https://api.logmeal.es/v2/image/segmentation/complete",
-      image,
-      {
-        fieldName: "image",
-        httpMethod: "POST",
-        uploadType: FileSystem.FileSystemUploadType.MULTIPART,
-        headers: {
-          Authorization: `APIUser_Carson ${process.env.EXPO_PUBLIC_LOGMEAL_API_KEY}`,
-        },
-      }
-    );
-    console.log("hi2");
-
-    console.log(JSON.stringify(response));
-    console.log(response.body);
-  } catch (e) {
-    console.log(e);
-    console.log(e.response);
-  }
-}
 
 export { IdentifyMeal };
