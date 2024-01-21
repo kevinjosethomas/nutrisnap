@@ -109,6 +109,7 @@ export default function Tabs() {
                         onPress={(action) => {
                             if (action === 'double') {
                                 navigation.navigate('Scan', { takePhoto: true });
+                                
                             } else {
                                 navigation.navigate('Scan');
                             }
