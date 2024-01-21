@@ -62,7 +62,7 @@ export default function CreateAccount() {
                 style={dynamicStyles.emailInput}
                 placeholder="Email"
                 value={info.email}
-                onChangeText={validateEmail}
+                onChangeText={(value) => handleInputChange('email', value)}
                 keyboardType="email-address"
                 autoCapitalize="none"
             />

@@ -7,6 +7,15 @@ export default function CreateAccount() {
     const navigation = useNavigation(); 
     const { age, setAge, setDietaryRestrictions, setWeight, setCalorieTarget } = useContext(GlobalContext);
 
+    const handleAgeChange = () => {
+        (event) => {
+            const ageValue = parseInt(event.nativeEvent.text, 10); 
+            if (!isNaN(ageValue)) {
+                setAge(ageValue);
+            }
+            console.log(ageValue);
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -17,13 +26,7 @@ export default function CreateAccount() {
                     style={styles.textInput }
                     placeholder="Age"
                     keyboardType="numeric" 
-                    onEndEditing={(event) => {
-                        const ageValue = parseInt(event.nativeEvent.text, 10); 
-                        if (!isNaN(ageValue)) {
-                            setAge(ageValue);
-                        }
-                        console.log(ageValue);
-                    }}
+                    onEndEditing={handleAgeChange}
                 />   
             </View>
             <View style={styles.input}>
