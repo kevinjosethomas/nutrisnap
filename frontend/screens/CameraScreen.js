@@ -27,6 +27,7 @@ export default function CameraScreen() {
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
   useEffect(() => {
+    setScanned(false);
     requestPermission();
   }, []);
 
@@ -67,6 +68,7 @@ export default function CameraScreen() {
   };
 
   const onPhotoTaken = async () => {
+    setScanned(false);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     const photo = await camera.takePictureAsync({
       base64: true,
