@@ -1,11 +1,12 @@
+import { View } from "react-native";
 import * as Haptics from "expo-haptics";
-import { useEffect, useState, useCallback } from "react";
 import { AutoFocus, Camera, CameraType } from "expo-camera";
-import { View, Text } from "react-native";
+import { useEffect, useState, useCallback } from "react";
 import {
   useRoute,
   useFocusEffect,
   useNavigation,
+  useIsFocused,
 } from "@react-navigation/native";
 
 import { GenerateAdvisory } from "../api/OpenAI";
@@ -13,8 +14,9 @@ import { GetNutritionInformation } from "../api/BarCode";
 
 export default function CameraScreen() {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
-  let camera;
+  const [camera, setCamera] = useState();
   const [scanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
@@ -26,6 +28,10 @@ export default function CameraScreen() {
 
   useFocusEffect(
     useCallback(() => {
+      setScanned(false);
+      if (camera) {
+        camera.resumePreview();
+      }
       if (route.params?.takePhoto) {
         onPhotoTaken();
       }
@@ -33,15 +39,20 @@ export default function CameraScreen() {
   );
 
   const onBarCodeScanned = async (result) => {
-    camera.pausePreview();
     setScanned(true);
+    camera.pausePreview();
     const barcode = result.data;
-    const { name, ingredients, nutritionString } =
+    const { name, ingredients, nutrition, nutritionString } =
       await GetNutritionInformation(barcode);
 
     const data = await GenerateAdvisory(name, ingredients, nutritionString);
 
-    navigation.navigate("Nutrition Page", { ...data });
+    navigation.navigate("Nutrition Page", {
+      ...data,
+      name,
+      ingredients,
+      nutrition,
+    });
   };
 
   const onPhotoTaken = async () => {
@@ -57,13 +68,15 @@ export default function CameraScreen() {
 
   return (
     <View className="flex-1">
-      <Camera
-        ref={(r) => (camera = r)}
-        type={CameraType.back}
-        className="flex-1 flex-col justify-end items-center py-10 relative"
-        autoFocus={AutoFocus.on}
-        onBarCodeScanned={scanned ? undefined : onBarCodeScanned}
-      />
+      {isFocused && (
+        <Camera
+          ref={(r) => setCamera(r)}
+          type={CameraType.back}
+          className="flex-1 flex-col justify-end items-center py-10 relative"
+          autoFocus={AutoFocus.on}
+          onBarCodeScanned={scanned ? undefined : onBarCodeScanned}
+        />
+      )}
     </View>
   );
 }

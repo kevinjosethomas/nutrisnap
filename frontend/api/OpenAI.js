@@ -9,7 +9,7 @@ Here is the format:
 success: boolean. true if you retrieved information. false if you failed to,
 rating: integer. rates the food item on a scale of 1 to 10 where 1 is very unhealthy/unsafe and 10 is healthy. be generous with your rating.
 warning: string. 1-2 sentences of any urgent life-threatening allergies/carcinogens or similar things to be worried about. leave empty if not urgent and life-threatening.
-description: string. 2-3 sentences that provide essential information about the item and any concerns that I should be vary of
+description: string. 1-2 sentences that provide essential information about the item.
 }`;
 
 async function GenerateAdvisory(name, ingredients, nutrition) {
@@ -32,12 +32,7 @@ async function GenerateAdvisory(name, ingredients, nutrition) {
 
   const data = JSON.parse(completion.choices[0].message.content);
 
-  if (data.success) {
-    console.log("hi");
-    return data;
-  } else {
-    throw Error("Failed to generate advisory");
-  }
+  return data;
 }
 
 export { GenerateAdvisory };

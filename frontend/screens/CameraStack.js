@@ -1,7 +1,6 @@
-import { createStackNavigator } from "@react-navigation/stack";
 import CameraScreen from "./CameraScreen";
 import NutritionPage from "./NutritionPage";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
@@ -10,7 +9,10 @@ export default function CameraStack() {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        detachPreviousScreen: true,
+        unmountOnBlur: true,
       }}
+      detachInactiveScreens={true}
     >
       <Stack.Screen name="Camera Screen" component={CameraScreen} />
       <Stack.Screen
