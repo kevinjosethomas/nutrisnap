@@ -3,6 +3,14 @@ import { Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import BannerBackground from "../assets/banner-background.png";
 
+//Carbs 225-325 grams
+//Fat 44-78 grams
+//Fiber 25-30 grams
+//Proteins 60 grams or 0.8 x bodyweight (kg)
+//Salt 2000mg 
+//sugar 25-36 depending on male/female
+
+
 export default function NutritionPage() {
   const route = useRoute();
   const nutrition = route.params;
