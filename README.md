@@ -24,10 +24,11 @@ This information is summarized and displayed to the user in a clean and concise 
 
 
 ## How we built it
-You can see our individual contributions [here](https://github.com/kevinjosethomas/nutrisnap/graphs/contributors). 
-<img width="911" alt="image" src="https://github.com/kevinjosethomas/nutrisnap/assets/46242684/95f461ff-f7d9-4ebf-8c60-903d31cee740">
 
 The app uses React Native for its frontend and a Python Django API for its backend. If the app detects a UPC code in the photo, it retrieves nutritional information from a [UPC food nutrition API](https://world.openfoodfacts.org) and summarizes its data in a clean and concise manner. If the app fails to detect a UPC code in the photo, it forwards the photo to its Django backend, which proceeds to classify all the food in the image using another [open API](https://www.logmeal.es). All collected nutritional data is forwarded to the [OpenAI API](https://platform.openai.com/docs/guides/text-generation/json-mode) to summarize nutritional information of the food item, and to provide the item with a nutrition rating betwween 1 and 10. This data is displayed to the user, and also added to their log of consumed food.
+
+You can see our individual contributions [here](https://github.com/kevinjosethomas/nutrisnap/graphs/contributors). 
+<img width="911" alt="image" src="https://github.com/kevinjosethomas/nutrisnap/assets/46242684/95f461ff-f7d9-4ebf-8c60-903d31cee740">
 
 
 ## What's next for NutriSnap
