@@ -3,7 +3,7 @@
 
 ### NutriSnap is an intuitive nutrition tracker that seamlessly integrates into your daily life.
 
-We won second place in the [nwHacks](https://nwhacks-2024.devpost.com) Health & Accessibility track. You can see our demo video [here](https://www.youtube.com/watch?v=4qnNvnklmWY) or view our DevPost submission [here](https://devpost.com/software/nutrition-facts). You can see our individual contributions [here](https://github.com/kevinjosethomas/nutrisnap/graphs/contributors).
+We won second place in the [nwHacks](https://nwhacks-2024.devpost.com) Health & Accessibility track. You can see our demo video [here](https://www.youtube.com/watch?v=4qnNvnklmWY) or view our DevPost submission [here](https://devpost.com/software/nutrition-facts).
 
 ## Inspiration
 Every time you go to a restaurant, its highly likely that you see someone taking a picture of their food before they eat it. We wanted to create a seamless way for people to keep track of their nutritional intake, minimizing the obstacles required to be aware of the food you consume. Building on the idea that people already often take pictures of the food they eat, we decided to utilize something as simple as one's camera app to keep track of their daily nutritional intake.
